@@ -1,21 +1,21 @@
 ﻿using System.IO;
 using System.Runtime.Loader;
-using Stratis.SmartContracts.Executor.Reflection.Compilation;
-using Stratis.SmartContracts.Executor.Reflection.Loader;
+using Stratis.SmartContracts.CLR.Compilation;
+using Stratis.SmartContracts.CLR.Loader;
 using Xunit;
 
 namespace Stratis.Bitcoin.Features.SmartContracts.Tests.Loader
 {
     public class ContractAssemblyLoaderTests
     {
-        private readonly SmartContractCompilationResult compilation;
+        private readonly ContractCompilationResult compilation;
         private readonly ContractAssemblyLoader loader;
 
         public string Contract = Path.Combine("Loader", "Test.cs");
 
         public ContractAssemblyLoaderTests()
         {
-            this.compilation = SmartContractCompiler.CompileFile(Contract);
+            this.compilation = ContractCompiler.CompileFile(Contract);
             this.loader = new ContractAssemblyLoader();
         }
 

@@ -33,6 +33,26 @@ namespace NBitcoin
         WITNESS_SCRIPT_ADDRESS
     }
 
+    /// <summary>
+    /// A container of all network instances of a certain high level network.
+    /// Every network normally comes in 3 flavors mainnet, testnet and regtest.
+    /// </summary>
+    public class NetworksSelector
+    {
+        public NetworksSelector(Func<Network> mainnet, Func<Network> testnet, Func<Network> regtest)
+        {
+            this.Mainnet = mainnet;
+            this.Testnet = testnet;
+            this.Regtest = regtest;
+        }
+
+        public Func<Network> Mainnet { get; }
+
+        public Func<Network> Testnet { get; }
+
+        public Func<Network> Regtest { get; }
+    }
+
     public abstract class Network
     {
         protected Block Genesis;
@@ -85,6 +105,16 @@ namespace NBitcoin
         /// The default port on which nodes of this network communicate with external clients. 
         /// </summary>
         public int DefaultPort { get; protected set; }
+
+        /// <summary>
+        /// The default maximum number of outbound connections a node on this network will form.
+        /// </summary>
+        public int DefaultMaxOutboundConnections { get; protected set; }
+
+        /// <summary>
+        /// The default maximum number of inbound connections a node on this network will accept.
+        /// </summary>
+        public int DefaultMaxInboundConnections { get; protected set; }
 
         /// <summary>
         /// The consensus for this network.
